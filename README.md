@@ -1,1 +1,1 @@
-Sun-Android
+Sun-Android (Alışkanlık Uygulaması)
