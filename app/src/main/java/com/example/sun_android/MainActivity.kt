@@ -45,3 +45,16 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+
+
+@Composable
+fun HomeScreen() {
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+            .background(Color.LightGray)
+    ) {
+        Text(text = "Home Screen", fontSize = 20.sp)
+    }
+
+}
