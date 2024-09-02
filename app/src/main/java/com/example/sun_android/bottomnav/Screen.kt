@@ -20,13 +20,13 @@ sealed class Screen(
 
 
     object Home:Screen("home","Home",Icons.Outlined.Add)
-    object Search:Screen("seacrh","Habits",Icons.Outlined.Home)
-    object Profile:Screen("profile","Swipe",Icons.Default.Style)
-    object Settings:Screen("settings","Statistics",Icons.Outlined.PieChart)
+    object Habits:Screen("seacrh","Habits",Icons.Outlined.Home)
+    object Swipe:Screen("profile","Swipe",Icons.Default.Style)
+    object Statistics:Screen("settings","Statistics",Icons.Outlined.PieChart)
 
     object Items{
-        val list= listOf(
-            Home,Search,Profile,Settings
+        val list= listOf(9*+
+            Home,Habits,Swipe,Statistics
         )
     }
 
