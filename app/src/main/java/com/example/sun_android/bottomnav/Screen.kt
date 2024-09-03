@@ -25,7 +25,7 @@ sealed class Screen(
     object Statistics:Screen("settings","Statistics",Icons.Outlined.PieChart)
 
     object Items{
-        val list= listOf(9*+
+        val list= listOf(
             Home,Habits,Swipe,Statistics
         )
     }
