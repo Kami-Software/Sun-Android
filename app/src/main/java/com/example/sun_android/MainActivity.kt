@@ -20,8 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.sun_android.bottomnav.CustomBottomNavigation
+import com.example.sun_android.bottomnav.HabbitScreen
 import com.example.sun_android.bottomnav.Screen
 import com.example.sun_android.ui.theme.SunAndroidTheme
 
@@ -35,58 +35,53 @@ class MainActivity : ComponentActivity() {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 window.insetsController?.setSystemBarsAppearance(
-                    0, // Temizle
+                    0, // Clear appearance
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
                 )
             } else {
                 @Suppress("DEPRECATION")
-                window.decorView.systemUiVisibility = 0 // Temizle
+                window.decorView.systemUiVisibility = 0 // Clear appearance
             }
 
-            // Geçerli ekran durumunu yönetin
             val currentScreen = remember { mutableStateOf<Screen>(Screen.Home) }
 
             SunAndroidTheme {
-                Surface( modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black),color = Color.Black) { // Arka plan rengini siyah yap
-                    Scaffold(containerColor = Color.Black, modifier = Modifier.fillMaxSize(),
+                Surface(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.Black), color = Color.Black
+                ) {
+                    Scaffold(
+                        containerColor = Color.Black,
+                        modifier = Modifier.fillMaxSize(),
                         bottomBar = {
                             CustomBottomNavigation(currentScreenId = currentScreen.value.id) { screen ->
                                 currentScreen.value = screen
                             }
                         }
                     ) { innerPadding ->
-                        // Ana içerik alanı
-                        Text(
-                            text = "Welcome to ${currentScreen.value.title}",
-                            modifier = Modifier
-                                .padding(innerPadding)
-                                .fillMaxSize(),
-                            color = Color.White // Metin rengini beyaz yaparak okunabilirliği artırın
-                        )
+                        when (currentScreen.value) {
+                            Screen.Home -> Text(
+                                text = "Welcome to Home",
+                                modifier = Modifier
+                                    .padding(innerPadding)
+                                    .fillMaxSize(),
+                                color = Color.White
+                            )
+                            Screen.Habits -> HabbitScreen(currentScreen.value) { screen ->
+                                currentScreen.value = screen
+                            }
+                            else -> Text(
+                                text = "Other Screen",
+                                modifier = Modifier
+                                    .padding(innerPadding)
+                                    .fillMaxSize(),
+                                color = Color.White
+                            )
+                        }
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(color = Color.Black) { // Arka plan rengini siyah yap
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-            color = Color.White // Metin rengini beyaz yaparak okunabilirliği artırın
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SunAndroidTheme {
-        Greeting("Android")
     }
 }
