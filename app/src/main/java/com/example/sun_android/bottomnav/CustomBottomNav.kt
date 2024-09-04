@@ -9,6 +9,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.SwitchCamera
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,14 +22,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.sun_android.sun.util.Screens
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CustomBottomNavigation(
     currentScreenId: String,
-    onItemSelected: (Screen) -> Unit
+    onItemSelected: (Screens) -> Unit
 ) {
-    val items = Screen.Items.list
+    val items = listOf(
+        Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
+    )
+
 
     Row(
         modifier = Modifier
@@ -36,9 +43,25 @@ fun CustomBottomNavigation(
         horizontalArrangement = Arrangement.SpaceBetween, // Sol, orta ve sağ grupları ayırmak için
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Sol taraf öğesi
-        CustomBottomNavigationItem(item = items[0], isSelected = items[0].id == currentScreenId) {
-            onItemSelected(items[0])
+
+        Box(
+            modifier = Modifier
+                .clip(CircleShape)
+                .border(1.dp, Color(0xFF6c6565), CircleShape) // Çerçeve eklendi
+                .background(Color(0xFF2c292a))
+                .clickable {
+                    // Butonun tıklanma olayı
+                    // Burada istediğiniz işlevi ekleyebilirsiniz
+                }
+                .padding(16.dp), // Butonun boyutunu ve iç boşluğunu ayarlıyoruz
+            contentAlignment = Alignment.Center // İkonu merkeze hizalıyoruz
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add, // İstediğiniz bir ikon
+                contentDescription = "Button Icon",
+                tint = Color.White,
+                modifier = Modifier.size(28.dp)
+            )
         }
 
         // Ortadaki iki öğeyi daha yakın yapmak için bir Row içinde gruplama
@@ -52,30 +75,30 @@ fun CustomBottomNavigation(
                 .padding(horizontal = 6.dp, vertical = 8.dp),
         ) {
             CustomBottomNavigationItem(
+                item = items[0],
+                isSelected = items[0].id == currentScreenId
+            ) {
+                onItemSelected(items[0])
+            }
+
+            CustomBottomNavigationItem(
                 item = items[1],
                 isSelected = items[1].id == currentScreenId
             ) {
                 onItemSelected(items[1])
             }
-
-            CustomBottomNavigationItem(
-                item = items[2],
-                isSelected = items[2].id == currentScreenId
-            ) {
-                onItemSelected(items[2])
-            }
         }
 
         // Sağ taraf öğesi
-        CustomBottomNavigationItem(item = items[3], isSelected = items[3].id == currentScreenId) {
-            onItemSelected(items[3])
+        CustomBottomNavigationItem(item = items[2], isSelected = items[2].id == currentScreenId) {
+            onItemSelected(items[2])
         }
     }
 }
 
 @ExperimentalAnimationApi
 @Composable
-fun CustomBottomNavigationItem(item: Screen, isSelected: Boolean, onClick: () -> Unit) {
+fun CustomBottomNavigationItem(item: Screens, isSelected: Boolean, onClick: () -> Unit) {
     val background =
         if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else Color.Transparent
     val contentColor =
@@ -113,8 +136,7 @@ fun CustomBottomNavigationItem(item: Screen, isSelected: Boolean, onClick: () ->
 @Composable
 @Preview
 fun Prev1() {
-    CustomBottomNavigation(currentScreenId = Screen.Home.id) {
-
+    CustomBottomNavigation(currentScreenId = Screens.Home.id) {
     }
 }
 
@@ -122,7 +144,6 @@ fun Prev1() {
 @Composable
 @Preview
 fun Prev2() {
-    CustomBottomNavigationItem(item = Screen.Home, isSelected = true) {
-
+    CustomBottomNavigationItem(item = Screens.Home, isSelected = true) {
     }
 }
