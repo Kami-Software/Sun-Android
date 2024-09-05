@@ -40,8 +40,7 @@ fun CustomBottomNavigation(
 
     Row(
         modifier = Modifier
-            .background(Color.Black)
-            .padding(8.dp)
+            .padding(horizontal = 4.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween, // Sol, orta ve sağ grupları ayırmak için
         verticalAlignment = Alignment.CenterVertically

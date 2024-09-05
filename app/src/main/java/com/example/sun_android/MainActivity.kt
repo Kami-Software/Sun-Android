@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.Black), color = Color.Black
+
                 ) {
                     val navController = rememberNavController()
                     LaunchedEffect(navController) {
@@ -91,7 +91,6 @@ class MainActivity : ComponentActivity() {
                         Box(
                             modifier = Modifier
                                 .padding(innerPadding)
-                                .background(MaterialTheme.colorScheme.background)
                         ) {
                             NavigationHost(navController = navController)
                         }
