@@ -16,6 +16,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -40,25 +42,28 @@ fun HabbitsScreen(navController: NavController) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-//        // Yüksekliği sınırlıyoruz
-//        Box(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(100.dp) // Yüksekliği sabitliyoruz
-//        ) {
-//            LazyVerticalStaggeredGrid(
-//                columns = StaggeredGridCells.Fixed(2), // İki sütun halinde grid
-//                modifier = Modifier.fillMaxSize() // Tüm alanı dolduruyor
-//            ) {
-//                items(habits.size) { index ->
-//                    HabbitCard(
-//                        modifier = Modifier.clickable {
-//                            // Example navigation on habit click
-//                            navController.navigate("detail/${habits[index]}")
-//                        }
-//                    )
-//                }
-//            }
-//        }
+        // Yüksekliği sınırlıyoruz
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+            // Yüksekliği sabitliyoruz
+        ) {
+            LazyVerticalStaggeredGrid(
+                columns = StaggeredGridCells.Fixed(2), // İki sütun halinde grid
+                modifier = Modifier.fillMaxSize() // Tüm alanı dolduruyor
+            ) {
+                items(habits.size) { index ->
+                    HabbitCard(habits[index])
+                }
+            }
+        }
     }
+}
+
+
+@Composable
+@Preview(showBackground = true)
+fun HabbitScreenPreview() {
+    HabbitsScreen(navController = NavController(LocalContext.current))
+
 }

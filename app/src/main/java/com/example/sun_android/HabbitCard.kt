@@ -1,5 +1,6 @@
 package com.example.sun_android
 
+import android.icu.text.CaseMap.Title
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -37,98 +38,99 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HabbitCard(modifier: Modifier) {
+fun HabbitCard(title: String) {
     val weekDays = listOf("M", "T", "W", "T", "F", "S", "S")
     var progress by remember { mutableStateOf(0.0f) }
 
-    LazyVerticalStaggeredGrid(
-        columns = StaggeredGridCells.Fixed(2),
-        modifier = Modifier.fillMaxSize(),
-        horizontalArrangement = Arrangement.Center
+    Card(
+        modifier = Modifier
+            .padding(10.dp)
+            .clickable {
+            },
+        colors = CardDefaults.cardColors(containerColor = Color.Black)
     ) {
-        item {
-            Card(
+        Column(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            Box(
                 modifier = Modifier
-                    .padding(vertical = 300.dp)
                     .fillMaxWidth()
-                    .clickable {
-                    },
-                colors = CardDefaults.cardColors(containerColor = Color.Black)
+                    .clip(RoundedCornerShape(15.dp))
+                    .height(175.dp)
+                    .background(Color.Black)
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(15.dp))
-                            .height(175.dp)
-                            .background(Color.Black)
-                    ) {
-                        CircularProgressIndicator(
-                            progress = progress,
-                            modifier = Modifier.fillMaxSize(), // To make the progress bar fit around the circle
-                            color = Color.Blue, // Progress bar color
-                            strokeWidth = 4.dp // Progress bar thickness
-                        )
-                        Column {
-                            Box(modifier = Modifier.fillMaxWidth()) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(24.dp) // Şeklin boyutu
-                                        .clip(CircleShape)
-                                        .background(Color.Red) // Şeklin rengi
-                                        .align(Alignment.TopEnd) // Sağ üst köşeye yerleştirme
-                                        .padding(8.dp)
-                                        .clickable {
-                                            if (progress < 1.0f) {
-                                                progress += 0.1f
-                                            }
-                                        }// Sağ üst köşeden biraz boşluk bırakma
-                                )
-                                Box(
-                                    modifier = Modifier
-                                        .size(60.dp) // Şeklin boyutu
-                                        .clip(CircleShape)
-                                        .background(Color.Red) // Şeklin rengi
-                                        .align(Alignment.TopStart) // Sağ üst köşeye yerleştirme
-                                        .padding(8.dp) // Sağ üst köşeden biraz boşluk bırakma
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.SwitchCamera,
-                                        contentDescription = "none",
-                                        Modifier.align(Alignment.Center)
-                                    )
-                                }
-                            }
-                            Text(text = "Running", color = Color.White)
-                            Row{
-                                for (i in 1..7) {
-                                    Box(
-                                        modifier = Modifier
-                                            .padding(2.dp) // Sağ üst köşeden biraz boşluk bırakma
-                                            .size(16.dp) // Şeklin boyutu
-                                            .clip(CircleShape)
-                                            .background(Color.Red) // Şeklin rengi
-                                    ){
-                                        Text(text = weekDays[i-1], color = Color.White, modifier = Modifier.align(Alignment.Center), fontSize = 10.sp)
+                Column {
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp) // Şeklin boyutu
+                                .clip(CircleShape)
+                                .background(Color.Red) // Şeklin rengi
+                                .align(Alignment.TopEnd) // Sağ üst köşeye yerleştirme
+                                .padding(8.dp)
+                                .clickable {
+                                    if (progress < 1.0f) {
+                                        progress += 0.1f
                                     }
-                                }
+                                }// Sağ üst köşeden biraz boşluk bırakma
+                        )
+                        Box(
+                            contentAlignment = Alignment.Center, // Center the icon in the middle
+                            modifier = Modifier
+                                .size(80.dp)
+                        ) {
+                            CircularProgressIndicator(
+                                progress = progress, // Bind this to your progress state
+                                modifier = Modifier
+                                    .fillMaxSize(), // Adjust padding to control distance between circle and progress indicator
+                                color = Color.Blue, // Color of the progress indicator
+                                strokeWidth = 4.dp // Thickness of the progress indicator
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .size(60.dp) // Şeklin boyutu
+                                    .clip(CircleShape)
+                                    .background(Color.Red) // Şeklin rengi
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.SwitchCamera,
+                                    contentDescription = "none",
+                                    Modifier.align(Alignment.Center)
+                                )
                             }
                         }
                     }
-
+                    Text(text = title, color = Color.White)
+                    Row {
+                        for (i in 1..7) {
+                            Box(
+                                modifier = Modifier
+                                    .padding(2.dp) // Sağ üst köşeden biraz boşluk bırakma
+                                    .size(16.dp) // Şeklin boyutu
+                                    .clip(CircleShape)
+                                    .background(Color.Red) // Şeklin rengi
+                            ) {
+                                Text(
+                                    text = weekDays[i - 1],
+                                    color = Color.White,
+                                    modifier = Modifier.align(Alignment.Center),
+                                    fontSize = 10.sp
+                                )
+                            }
+                        }
+                    }
                 }
             }
-        }
 
+        }
     }
+
+
 }
 
 @Preview(showBackground = true)
 @Composable
 fun HabbitCardPreview() {
-    HabbitCard(Modifier)
+    HabbitCard("Modifier")
 }
