@@ -1,4 +1,4 @@
-package com.example.sun_android.bottomnav
+package com.example.sun_android.sun.presentation.navigation
 
 
 import androidx.compose.animation.AnimatedVisibility
@@ -8,10 +8,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.SwitchCamera
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -136,7 +134,7 @@ fun CustomBottomNavigationItem(item: Screens, isSelected: Boolean, onClick: () -
 @Composable
 @Preview
 fun Prev1() {
-    CustomBottomNavigation(currentScreenId = Screens.Home.id) {
+    CustomBottomNavigation(currentScreenId = Screens.HabbitsScreen.id) {
     }
 }
 
@@ -144,6 +142,6 @@ fun Prev1() {
 @Composable
 @Preview
 fun Prev2() {
-    CustomBottomNavigationItem(item = Screens.Home, isSelected = true) {
+    CustomBottomNavigationItem(item = Screens.HabbitsScreen, isSelected = true) {
     }
 }

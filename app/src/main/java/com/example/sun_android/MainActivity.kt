@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.sun_android.bottomnav.CustomBottomNavigation
+import com.example.sun_android.sun.presentation.navigation.CustomBottomNavigation
 import com.example.sun_android.sun.presentation.habits_screen.HabbitsScreen
 import com.example.sun_android.sun.presentation.statistics_screen.StatisticsScreen
 import com.example.sun_android.sun.presentation.swipe_screen.SwipeScreen
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                 window.decorView.systemUiVisibility = 0 // Clear appearance
             }
 
-            val currentScreen = remember { mutableStateOf<Screens>(Screens.Home) }
+            val currentScreen = remember { mutableStateOf<Screens>(Screens.HabbitsScreen) }
 
             SunAndroidTheme {
                 Surface(
@@ -58,13 +58,30 @@ class MainActivity : ComponentActivity() {
                         .background(Color.Black), color = Color.Black
                 ) {
                     val navController = rememberNavController()
-
+                    LaunchedEffect(navController) {
+                        navController.currentBackStackEntryFlow.collect { backStackEntry ->
+                            val destination = backStackEntry.destination.route
+                            currentScreen.value = when (destination) {
+                                Screens.HabbitsScreen.id -> Screens.HabbitsScreen
+                                Screens.SwipeScreen.id -> Screens.SwipeScreen
+                                Screens.StatisticsScreen.id -> Screens.StatisticsScreen
+                                else -> Screens.HabbitsScreen
+                            }
+                        }
+                    }
                     Scaffold(
                         containerColor = Color.Black,
                         modifier = Modifier.fillMaxSize(),
                         bottomBar = {
                             CustomBottomNavigation(currentScreenId = currentScreen.value.id) { screen ->
                                 currentScreen.value = screen
+                                navController.navigate(screen.id) {
+                                    popUpTo(navController.graph.startDestinationId) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
                             }
                         }
                     ) { innerPadding ->

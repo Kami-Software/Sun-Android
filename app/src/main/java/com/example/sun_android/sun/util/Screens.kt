@@ -12,7 +12,6 @@ sealed class Screens(
     val title: String,
     val icon: ImageVector,
 ) {
-    object Home : Screens("home", "Home", Icons.Outlined.Add)
     object HabbitsScreen : Screens("habbit", "Habits", Icons.Outlined.Home)
     object SwipeScreen : Screens("swipe", "Swipe", Icons.Default.Style)
     object StatisticsScreen : Screens("statistics", "Statistics", Icons.Outlined.PieChart)
