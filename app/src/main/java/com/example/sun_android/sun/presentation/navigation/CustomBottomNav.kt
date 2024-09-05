@@ -10,19 +10,23 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.sun_android.sun.presentation.components.SheetBar
 import com.example.sun_android.sun.util.Screens
 
-@OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CustomBottomNavigation(
     currentScreenId: String,
@@ -31,6 +35,7 @@ fun CustomBottomNavigation(
     val items = listOf(
         Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
     )
+    val showSheet = remember { mutableStateOf(false) }
 
 
     Row(
@@ -48,8 +53,8 @@ fun CustomBottomNavigation(
                 .border(1.dp, Color(0xFF6c6565), CircleShape) // Çerçeve eklendi
                 .background(Color(0xFF2c292a))
                 .clickable {
-                    // Butonun tıklanma olayı
-                    // Burada istediğiniz işlevi ekleyebilirsiniz
+                    showSheet.value = !showSheet.value
+
                 }
                 .padding(16.dp), // Butonun boyutunu ve iç boşluğunu ayarlıyoruz
             contentAlignment = Alignment.Center // İkonu merkeze hizalıyoruz
@@ -90,6 +95,16 @@ fun CustomBottomNavigation(
         // Sağ taraf öğesi
         CustomBottomNavigationItem(item = items[2], isSelected = items[2].id == currentScreenId) {
             onItemSelected(items[2])
+        }
+
+        SheetBar(
+            showSheet = showSheet.value,
+            onDismissRequest = { showSheet.value = false }
+        ) {
+            Column {
+                Text("Alt sayfa içeriği buraya gelir!")
+                // Alt sayfanın içeriğini buraya ekleyebilirsiniz
+            }
         }
     }
 }
