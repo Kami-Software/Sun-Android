@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -20,10 +21,9 @@ import com.example.sun_android.sun.presentation.components.HabbitCard
 
 @Composable
 fun HabbitsScreen(navController: NavController) {
-    // Simulated list of habits (Can be replaced with actual data)
-    val habits = listOf("Running", "Meditation", "Reading", "Exercise", "Coding", "Yoga", "Writing")
+    val habits = remember { listOf("Running") }
 
-    // Main layout for the Habbits screen
+    // Main layout for the Habits screen
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -37,28 +37,20 @@ fun HabbitsScreen(navController: NavController) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Yüksekliği sınırlıyoruz
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-            // Yüksekliği sabitliyoruz
+        // LazyVerticalStaggeredGrid to display habits
+        LazyVerticalStaggeredGrid(
+            columns = StaggeredGridCells.Fixed(2), // Two columns
+            modifier = Modifier.fillMaxSize()
         ) {
-            LazyVerticalStaggeredGrid(
-                columns = StaggeredGridCells.Fixed(2), // İki sütun halinde grid
-                modifier = Modifier.fillMaxSize() // Tüm alanı dolduruyor
-            ) {
-                items(habits.size) { index ->
-                    HabbitCard(habits[index])
-                }
+            items(habits.size) { index ->
+                HabbitCard(habits[index])
             }
         }
     }
 }
 
-
 @Composable
 @Preview(showBackground = true)
 fun HabbitScreenPreview() {
     HabbitsScreen(navController = NavController(LocalContext.current))
-
 }
