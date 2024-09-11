@@ -50,7 +50,6 @@ fun SheetBar(
             tonalElevation = tonalElevation,
             scrimColor = scrimColor,
             dragHandle = dragHandle,
-            windowInsets = windowInsets
         ) {
             Column(modifier = Modifier.padding(bottom = bottomPadding)) {
                 content()
