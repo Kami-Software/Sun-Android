@@ -15,14 +15,19 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.sun_android.sun.presentation.components.FirstPageContent
+import com.example.sun_android.sun.presentation.components.ModularSheetBar
+import com.example.sun_android.sun.presentation.components.SecondPageContent
 import com.example.sun_android.sun.presentation.components.SheetBar
 import com.example.sun_android.sun.util.Screens
 
@@ -32,6 +37,9 @@ fun CustomBottomNavigation(
     currentScreenId: String,
     onItemSelected: (Screens) -> Unit
 ) {
+    var currentPage by remember { mutableStateOf(1) }
+    var habitName by remember { mutableStateOf("") }
+    var additionalInput by remember { mutableStateOf("") }
     val items = listOf(
         Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
     )
@@ -53,6 +61,7 @@ fun CustomBottomNavigation(
                 .background(Color(0xFF2c292a))
                 .clickable {
                     showSheet.value = !showSheet.value
+                    currentPage = 1
 
                 }
                 .padding(16.dp), // Butonun boyutunu ve iç boşluğunu ayarlıyoruz
@@ -96,13 +105,26 @@ fun CustomBottomNavigation(
             onItemSelected(items[2])
         }
 
-        SheetBar(
+        ModularSheetBar(
             showSheet = showSheet.value,
             onDismissRequest = { showSheet.value = false }
         ) {
-            Column {
-                Text("Alt sayfa içeriği buraya gelir!")
-                // Alt sayfanın içeriğini buraya ekleyebilirsiniz
+            when (currentPage) {
+                1 -> FirstPageContent(
+                    habitName = habitName,
+                    onHabitNameChange = { habitName = it },
+                    onCancel = { showSheet.value = false },
+                    onNext = { currentPage = 2 }
+                )
+                2 -> SecondPageContent(
+                    additionalInput = additionalInput,
+                    onAdditionalInputChange = { additionalInput = it },
+                    onBack = { currentPage = 1 },
+                    onSave = {
+                        // Handle save action
+                        showSheet.value = false
+                    }
+                )
             }
         }
     }
