@@ -39,6 +39,7 @@ fun CustomBottomNavigation(
 ) {
     var currentPage by remember { mutableStateOf(1) }
     var habitName by remember { mutableStateOf("") }
+    val totalPages = 2 // Total number of pages
     var additionalInput by remember { mutableStateOf("") }
     val items = listOf(
         Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
@@ -104,11 +105,13 @@ fun CustomBottomNavigation(
         CustomBottomNavigationItem(item = items[2], isSelected = items[2].id == currentScreenId) {
             onItemSelected(items[2])
         }
+        val progress = currentPage.toFloat() / totalPages
 
         ModularSheetBar(
             showSheet = showSheet.value,
-            onDismissRequest = { showSheet.value = false }
-        ) {
+            onDismissRequest = { showSheet.value = false },
+            progress = progress,
+            ) {
             when (currentPage) {
                 1 -> FirstPageContent(
                     habitName = habitName,

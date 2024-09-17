@@ -30,23 +30,15 @@ fun FirstPageContent(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Progress bar
-        LinearProgressIndicator(
-            progress = 0.5f,
-            modifier = Modifier.fillMaxWidth()
-        )
-
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Title
         Text(
-            text = "Habits Name",
+            text = "Habit Name",
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // TextField
         TextField(
             value = habitName,
             onValueChange = onHabitNameChange,
@@ -56,16 +48,15 @@ fun FirstPageContent(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Buttons
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(onClick = onCancel) {
-                Text(text = "Cancel")
+                Text("Cancel")
             }
             Button(onClick = onNext) {
-                Text(text = "Next")
+                Text("Next")
             }
         }
     }

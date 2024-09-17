@@ -31,15 +31,8 @@ fun SecondPageContent(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Progress bar
-        LinearProgressIndicator(
-            progress = 1.0f,
-            modifier = Modifier.fillMaxWidth()
-        )
-
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Title
         Text(
             text = "Additional Details",
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -47,7 +40,6 @@ fun SecondPageContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // TextField
         TextField(
             value = additionalInput,
             onValueChange = onAdditionalInputChange,
@@ -57,16 +49,15 @@ fun SecondPageContent(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Buttons
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(onClick = onBack) {
-                Text(text = "Back")
+                Text("Back")
             }
             Button(onClick = onSave) {
-                Text(text = "Save")
+                Text("Save")
             }
         }
     }
