@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +32,7 @@ import com.example.sun_android.sun.presentation.components.ModularSheetBar
 import com.example.sun_android.sun.presentation.components.SecondPageContent
 import com.example.sun_android.sun.presentation.components.SheetBar
 import com.example.sun_android.sun.util.Screens
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -111,18 +114,27 @@ fun CustomBottomNavigation(
             showSheet = showSheet.value,
             onDismissRequest = { showSheet.value = false },
             progress = progress,
-            ) {
-            when (currentPage) {
-                1 -> FirstPageContent(
+            onPageChanged = { currentPage = it } // Handle page change here
+        ) { page, pagerState, coroutineScope ->
+        when (page) {
+                0 -> FirstPageContent(
                     habitName = habitName,
                     onHabitNameChange = { habitName = it },
                     onCancel = { showSheet.value = false },
-                    onNext = { currentPage = 2 }
+                    onNext = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(1) // Navigate to second page
+                        }
+                    }
                 )
-                2 -> SecondPageContent(
+                1 -> SecondPageContent(
                     additionalInput = additionalInput,
                     onAdditionalInputChange = { additionalInput = it },
-                    onBack = { currentPage = 1 },
+                    onBack = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(0) // Navigate back to first page
+                        }
+                    },
                     onSave = {
                         // Handle save action
                         showSheet.value = false

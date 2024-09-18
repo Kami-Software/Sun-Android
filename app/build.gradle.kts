@@ -64,6 +64,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.8.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.32.0")
+    implementation ("androidx.compose.ui:ui-util:1.7.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

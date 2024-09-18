@@ -37,7 +37,7 @@ fun SecondPageContent(
             text = "Additional Details",
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
-
+        ColorCard()
         Spacer(modifier = Modifier.height(16.dp))
 
         TextField(
