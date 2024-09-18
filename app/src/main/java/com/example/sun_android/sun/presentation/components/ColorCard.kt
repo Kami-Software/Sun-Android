@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -15,13 +16,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlin.random.Random
 
 @Composable
 
 fun ColorCard(){
-    val pagerState = rememberPagerState{0}
+    val pagerState = rememberPagerState(pageCount = { 7 } )
 
     // Generate 7 random colors and remember them
     val colors = remember {
@@ -36,9 +38,9 @@ fun ColorCard(){
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.height(300.dp)
     ) {
         HorizontalPager(
             beyondViewportPageCount = colors.size,
@@ -53,4 +55,10 @@ fun ColorCard(){
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun ColorCardPreview() {
+    ColorCard()
 }

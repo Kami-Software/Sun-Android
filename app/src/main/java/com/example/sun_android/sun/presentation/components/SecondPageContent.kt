@@ -17,7 +17,9 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
 // Second page content
 @Composable
 fun SecondPageContent(
@@ -40,13 +42,6 @@ fun SecondPageContent(
         ColorCard()
         Spacer(modifier = Modifier.height(16.dp))
 
-        TextField(
-            value = additionalInput,
-            onValueChange = onAdditionalInputChange,
-            label = { Text("Additional Input") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
         Spacer(modifier = Modifier.weight(1f))
 
         Row(
@@ -61,4 +56,14 @@ fun SecondPageContent(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun SecondPageContentPreview() {
+    SecondPageContent(
+        additionalInput = "",
+        onAdditionalInputChange = {},
+        onBack = {},
+        onSave = {})
 }
