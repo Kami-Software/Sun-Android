@@ -1,5 +1,7 @@
 package com.example.sun_android.sun.presentation.components
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,11 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +38,7 @@ import androidx.compose.ui.util.lerp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.emoji2.emojipicker.EmojiPickerView
 import androidx.emoji2.emojipicker.EmojiViewItem
+import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 @Composable
@@ -52,7 +58,16 @@ fun ColorCard() {
         Color.Magenta,
         Color.Gray
     )
-
+    var emojiScale by remember { mutableStateOf(1f) }
+    val animatedScale by animateFloatAsState(
+        targetValue = emojiScale,
+        animationSpec = tween(durationMillis = 300)
+    )
+    LaunchedEffect(selectedEmoji) {
+        emojiScale = 1.5f // Emojiyi büyüt
+        delay(300)        // Bir süre bekle
+        emojiScale = 1f   // Emojiyi tekrar normal boyuta getir
+    }
     Box(
         modifier = Modifier
             .height(300.dp)
@@ -99,30 +114,41 @@ fun ColorCard() {
                     ) {
                         Text(
                             text = selectedEmoji,
-                            style = MaterialTheme.typography.headlineLarge
+                            style = MaterialTheme.typography.headlineLarge,
+                            modifier = Modifier.graphicsLayer(
+                                scaleX = animatedScale,
+                                scaleY = animatedScale
+                            )
                         )
-                    }x
+                    }
                 }
             }
         }
         if (showEmojiPicker) {
-            val context = LocalContext.current
-            AndroidView(
-                factory = { ctx ->
-                    EmojiPickerView(ctx).apply {
-                        setOnEmojiPickedListener { emojiViewItem: EmojiViewItem ->
-                            selectedEmoji = emojiViewItem.emoji
-                            showEmojiPicker = false // Emoji seçildikten sonra picker'ı kapat
-                        }
-                    }
+            AlertDialog(
+                onDismissRequest = { showEmojiPicker = false },
+                text = {
+                    AndroidView(
+                        factory = { ctx ->
+                            EmojiPickerView(ctx,).apply {
+                                emojiGridRows = 4F // Gösterilecek satır sayısını ayarlayın
+                                setOnEmojiPickedListener { emojiViewItem: EmojiViewItem ->
+                                    selectedEmoji = emojiViewItem.emoji
+                                    showEmojiPicker = false // Emoji seçildikten sonra picker'ı kapat
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp) // Picker'ın yüksekliğini ayarlayın
+                    )
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.White)
-                    .align(Alignment.BottomCenter) // Picker'ı ekranın altında göster
+                confirmButton = {
+                }
             )
         }
     }
+
 }
 
 @Preview
