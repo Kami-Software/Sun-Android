@@ -132,27 +132,10 @@ fun CustomBottomNavigation(
         ) { page, pagerState, coroutineScope ->
         when (page) {
                 0 -> FirstPageContent(
-                    habitName = habitName,
-                    onHabitNameChange = { habitName = it },
-                    onCancel = { showSheet.value = false },
-                    onNext = {
-                        coroutineScope.launch {
-                            pagerState.animateScrollToPage(1) // Navigate to second page
-                        }
-                    }
+
                 )
                 1 -> SecondPageContent(
-                    additionalInput = additionalInput,
-                    onAdditionalInputChange = { additionalInput = it },
-                    onBack = {
-                        coroutineScope.launch {
-                            pagerState.animateScrollToPage(0) // Navigate back to first page
-                        }
-                    },
-                    onSave = {
-                        // Handle save action
-                        showSheet.value = false
-                    }
+
                 )
             }
         }
