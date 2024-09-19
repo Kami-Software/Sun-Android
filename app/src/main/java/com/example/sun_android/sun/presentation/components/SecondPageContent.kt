@@ -48,12 +48,6 @@ fun SecondPageContent(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Button(onClick = onBack) {
-                Text("Back")
-            }
-            Button(onClick = onSave) {
-                Text("Save")
-            }
         }
     }
 }

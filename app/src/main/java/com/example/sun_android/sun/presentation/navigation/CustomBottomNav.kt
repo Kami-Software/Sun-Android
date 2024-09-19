@@ -16,7 +16,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -40,7 +42,7 @@ fun CustomBottomNavigation(
     currentScreenId: String,
     onItemSelected: (Screens) -> Unit
 ) {
-    var currentPage by remember { mutableStateOf(1) }
+    var currentPage by remember { mutableIntStateOf(0) } // İlk sayfa her zaman 0
     var habitName by remember { mutableStateOf("") }
     val totalPages = 2 // Total number of pages
     var additionalInput by remember { mutableStateOf("") }
@@ -48,7 +50,17 @@ fun CustomBottomNavigation(
         Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
     )
     val showSheet = remember { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
+    val pagerState = rememberPagerState(pageCount = { 2 })
 
+    LaunchedEffect(showSheet.value) {
+        if (showSheet.value) {
+            currentPage = 0 // Her seferinde ilk sayfa olsun
+            coroutineScope.launch {
+                pagerState.scrollToPage(0) // Sayfayı sıfıra taşı
+            }
+        }
+    }
 
     Row(
         modifier = Modifier
@@ -65,7 +77,7 @@ fun CustomBottomNavigation(
                 .background(Color(0xFF2c292a))
                 .clickable {
                     showSheet.value = !showSheet.value
-                    currentPage = 1
+                    currentPage = 0
 
                 }
                 .padding(16.dp), // Butonun boyutunu ve iç boşluğunu ayarlıyoruz
@@ -114,7 +126,9 @@ fun CustomBottomNavigation(
             showSheet = showSheet.value,
             onDismissRequest = { showSheet.value = false },
             progress = progress,
-            onPageChanged = { currentPage = it } // Handle page change here
+            onPageChanged = { currentPage = it } ,
+            pagerState = pagerState // PagerState'i burada sağlıyoruz
+// Handle page change here
         ) { page, pagerState, coroutineScope ->
         when (page) {
                 0 -> FirstPageContent(
