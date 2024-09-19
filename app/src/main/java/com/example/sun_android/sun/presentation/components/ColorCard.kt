@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.view.size
 import androidx.emoji2.emojipicker.EmojiPickerView
 import androidx.emoji2.emojipicker.EmojiViewItem
 import kotlinx.coroutines.delay
@@ -140,12 +141,12 @@ fun ColorCard() {
         // Emoji picker dialogu
         if (showEmojiPicker) {
             AlertDialog(
+                containerColor = Color(0xFF201e1e),
                 onDismissRequest = { showEmojiPicker = false },
                 text = {
                     AndroidView(
                         factory = { ctx ->
                             EmojiPickerView(ctx).apply {
-                                emojiGridRows = 4F
                                 setOnEmojiPickedListener { emojiViewItem: EmojiViewItem ->
                                     selectedEmoji = emojiViewItem.emoji
                                     showEmojiPicker = false
