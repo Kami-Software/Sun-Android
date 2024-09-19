@@ -25,10 +25,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.emoji2.emojipicker.EmojiPickerView
+import androidx.emoji2.emojipicker.EmojiViewItem
 import kotlin.random.Random
 
 @Composable
@@ -93,10 +97,30 @@ fun ColorCard() {
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text = selectedEmoji, style = MaterialTheme.typography.headlineLarge)
-                    }
+                        Text(
+                            text = selectedEmoji,
+                            style = MaterialTheme.typography.headlineLarge
+                        )
+                    }x
                 }
             }
+        }
+        if (showEmojiPicker) {
+            val context = LocalContext.current
+            AndroidView(
+                factory = { ctx ->
+                    EmojiPickerView(ctx).apply {
+                        setOnEmojiPickedListener { emojiViewItem: EmojiViewItem ->
+                            selectedEmoji = emojiViewItem.emoji
+                            showEmojiPicker = false // Emoji seçildikten sonra picker'ı kapat
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White)
+                    .align(Alignment.BottomCenter) // Picker'ı ekranın altında göster
+            )
         }
     }
 }
