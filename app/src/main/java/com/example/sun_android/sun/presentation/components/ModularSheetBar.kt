@@ -3,6 +3,7 @@ package com.example.sun_android.sun.presentation.components
 import android.graphics.drawable.shapes.Shape
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ModalBottomSheet
@@ -35,6 +38,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,15 +90,36 @@ fun ModularSheetBar(
                             .clip(RoundedCornerShape(10.dp)), // Köşeleri yuvarla
                         color = Color.Transparent,
                         trackColor = Color(0xFF7d2f40),
-                        strokeCap = StrokeCap.Round
+                        strokeCap = StrokeCap.Butt
                     )
                 }
 
                 HorizontalPager(
-                    state = pagerState
+                    state = pagerState,
+                    modifier = Modifier.weight(1f) // Pager'ın fazla yer kaplamasını önle
                 ) { page ->
                     content(page, pagerState, coroutineScope)
                 }
+
+                Button(
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp, vertical = 40.dp)
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    onClick = {
+                        coroutineScope.launch {
+                            val nextPage = pagerState.currentPage + 1
+                            if (nextPage < pagerState.pageCount) {
+                                pagerState.animateScrollToPage(nextPage)
+                            }
+                        }
+                    },
+                    shape = CircleShape,
+                    colors = ButtonDefaults.buttonColors( Color(0xFFec3557), Color.White)
+                ) {
+                    Text(text = "Next")
+                }
+
             }
         }
     }
@@ -103,22 +128,17 @@ fun ModularSheetBar(
 @Preview
 @Composable
 fun SheetBarPreview() {
-    Box(
+    Button(
         modifier = Modifier
+            .padding(horizontal = 20.dp, vertical = 40.dp)
             .fillMaxWidth()
-            .padding(vertical = 25.dp, horizontal = 20.dp)
-            .clip(RoundedCornerShape(10.dp)) // Köşeleri yuvarla
-            .background(Color.Red) // Arka plan rengi
+            .height(50.dp),
+        onClick = {},
+        shape = CircleShape,
+        colors = ButtonColors( Color(0xFFec3557), Color.White, Color(0xFFec3557), Color(0xFFec3557)),
     ) {
-        LinearProgressIndicator(
-            progress = { 0.4f },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(5.dp)
-                .clip(RoundedCornerShape(10.dp)), // Köşeleri yuvarla
-            color = Color.Transparent,
-            trackColor = Color(0xFF7d2f40),
-            strokeCap = StrokeCap.Round,
-        )
+        Text(text = "Next")
     }
+
+
 }
