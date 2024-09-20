@@ -45,14 +45,14 @@ fun CustomBottomNavigation(
 ) {
     var currentPage by remember { mutableIntStateOf(0) } // İlk sayfa her zaman 0
     var habitName by remember { mutableStateOf("") }
-    val totalPages = 2 // Total number of pages
+    val totalPages = 3 // Total number of pages
     var additionalInput by remember { mutableStateOf("") }
     val items = listOf(
         Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
     )
     val showSheet = remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    val pagerState = rememberPagerState(pageCount = { 2 })
+    val pagerState = rememberPagerState(pageCount = { 3 })
 
     LaunchedEffect(showSheet.value) {
         if (showSheet.value) {
