@@ -29,11 +29,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.sun_android.sun.presentation.components.FifthPageContent
 import com.example.sun_android.sun.presentation.components.FirstPageContent
 import com.example.sun_android.sun.presentation.components.FourthPageContent
 import com.example.sun_android.sun.presentation.components.ModularSheetBar
 import com.example.sun_android.sun.presentation.components.SecondPageContent
 import com.example.sun_android.sun.presentation.components.SheetBar
+import com.example.sun_android.sun.presentation.components.SixthPageContent
 import com.example.sun_android.sun.presentation.components.ThirdPageContent
 import com.example.sun_android.sun.util.Screens
 import kotlinx.coroutines.launch
@@ -46,14 +48,14 @@ fun CustomBottomNavigation(
 ) {
     var currentPage by remember { mutableIntStateOf(0) } // İlk sayfa her zaman 0
     var habitName by remember { mutableStateOf("") }
-    val totalPages = 4 // Total number of pages
+    val totalPages = 6 // Total number of pages
     var additionalInput by remember { mutableStateOf("") }
     val items = listOf(
         Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
     )
     val showSheet = remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    val pagerState = rememberPagerState(pageCount = { 4 })
+    val pagerState = rememberPagerState(pageCount = { 6 })
 
     LaunchedEffect(showSheet.value) {
         if (showSheet.value) {
@@ -137,6 +139,8 @@ fun CustomBottomNavigation(
                 1 -> SecondPageContent()
                 2 -> ThirdPageContent()
                 3 -> FourthPageContent()
+                4 -> FifthPageContent()
+                5 -> SixthPageContent()
 
             }
         }
