@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AirplaneTicket
+import androidx.compose.material.icons.outlined.LocalActivity
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,7 +42,7 @@ fun FirstPageContent(
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = Icons.Outlined.AirplaneTicket,
+            imageVector = Icons.Outlined.LocalActivity,
             contentDescription = "Icon Button",
             modifier = Modifier.size(100.dp),
             tint = Color(0xFFec3557)

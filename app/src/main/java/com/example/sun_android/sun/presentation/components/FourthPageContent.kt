@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CalendarMonth
+import androidx.compose.material.icons.outlined.Tag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +37,7 @@ fun FourthPageContent(){
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = Icons.Outlined.CalendarMonth,
+            imageVector = Icons.Outlined.Tag,
             contentDescription = "Icon Button",
             modifier = Modifier.size(100.dp),
             tint = Color(0xFFec3557)
@@ -44,28 +45,19 @@ fun FourthPageContent(){
 
         Text(
             modifier = Modifier.padding(top = 15.dp),
-            text = "Frequency",
+            text = "Daily Goal",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White,
             textAlign = TextAlign.Center
         )
         Text(
-            text = "Choose which days to repeat this habit",
+            text = "Set a realistic for your habit",
             fontSize = 20.sp,
             fontWeight = FontWeight.Light,
             color = Color(0xFFB0B0B0), // Lighter gray for subtitle
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(bottom = 40.dp)
-        )
-
-        Text(
-            text = "Repeat",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White, // Lighter gray for subtitle
-            textAlign = TextAlign.Start,
-            modifier = Modifier.padding(bottom = 20.dp, start = 20.dp).align(Alignment.Start)
         )
     }
 }
