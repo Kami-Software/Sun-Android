@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.EditCalendar
+import androidx.compose.material.icons.outlined.EventRepeat
 import androidx.compose.material.icons.outlined.Tag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -31,7 +32,7 @@ fun FifthPageContent() {
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = Icons.Outlined.EditCalendar,
+            imageVector = Icons.Outlined.EventRepeat,
             contentDescription = "Icon Button",
             modifier = Modifier.size(100.dp),
             tint = Color(0xFFec3557)
