@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.sun_android.sun.presentation.components.FirstPageContent
+import com.example.sun_android.sun.presentation.components.FourthPageContent
 import com.example.sun_android.sun.presentation.components.ModularSheetBar
 import com.example.sun_android.sun.presentation.components.SecondPageContent
 import com.example.sun_android.sun.presentation.components.SheetBar
@@ -45,14 +46,14 @@ fun CustomBottomNavigation(
 ) {
     var currentPage by remember { mutableIntStateOf(0) } // İlk sayfa her zaman 0
     var habitName by remember { mutableStateOf("") }
-    val totalPages = 3 // Total number of pages
+    val totalPages = 4 // Total number of pages
     var additionalInput by remember { mutableStateOf("") }
     val items = listOf(
         Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
     )
     val showSheet = remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    val pagerState = rememberPagerState(pageCount = { 3 })
+    val pagerState = rememberPagerState(pageCount = { 4 })
 
     LaunchedEffect(showSheet.value) {
         if (showSheet.value) {
@@ -127,14 +128,16 @@ fun CustomBottomNavigation(
             showSheet = showSheet.value,
             onDismissRequest = { showSheet.value = false },
             progress = progress,
-            onPageChanged = { currentPage = it } ,
+            onPageChanged = { currentPage = it },
             pagerState = pagerState // PagerState'i burada sağlıyoruz
 // Handle page change here
         ) { page, pagerState, coroutineScope ->
-        when (page) {
+            when (page) {
                 0 -> FirstPageContent()
                 1 -> SecondPageContent()
                 2 -> ThirdPageContent()
+                3 -> FourthPageContent()
+
             }
         }
     }
