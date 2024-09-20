@@ -124,7 +124,7 @@ fun CustomBottomNavigation(
         CustomBottomNavigationItem(item = items[2], isSelected = items[2].id == currentScreenId) {
             onItemSelected(items[2])
         }
-        val progress = currentPage.toFloat() / totalPages
+        val progress = currentPage.toFloat() / (totalPages-1)
 
         ModularSheetBar(
             showSheet = showSheet.value,

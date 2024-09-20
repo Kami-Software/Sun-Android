@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AccessTime
 import androidx.compose.material.icons.outlined.EventRepeat
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -30,7 +31,7 @@ fun SixthPageContent() {
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = Icons.Outlined.EventRepeat,
+            imageVector = Icons.Outlined.AccessTime,
             contentDescription = "Icon Button",
             modifier = Modifier.size(100.dp),
             tint = Color(0xFFec3557)
@@ -38,14 +39,14 @@ fun SixthPageContent() {
 
         Text(
             modifier = Modifier.padding(top = 15.dp),
-            text = "Start Date",
+            text = "Reminder",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White,
             textAlign = TextAlign.Center
         )
         Text(
-            text = "Choose the start date of this habit",
+            text = "Set a reminder for your habit",
             fontSize = 20.sp,
             fontWeight = FontWeight.Light,
             color = Color(0xFFB0B0B0), // Lighter gray for subtitle

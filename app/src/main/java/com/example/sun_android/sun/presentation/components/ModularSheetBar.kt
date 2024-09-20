@@ -170,7 +170,7 @@ fun ModularSheetBar(
                             shape = CircleShape,
                             colors = ButtonDefaults.buttonColors(Color(0xFFec3557), Color.White)
                         ) {
-                            Text(text = if (pagerState.currentPage == pagerState.pageCount - 1) "Finish" else "Next")
+                            Text(text = if (pagerState.currentPage == pagerState.pageCount - 1) "Save" else "Next")
                         }
                     }
                 }
