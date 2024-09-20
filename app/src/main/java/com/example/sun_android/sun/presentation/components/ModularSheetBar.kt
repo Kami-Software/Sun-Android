@@ -98,7 +98,7 @@ fun ModularSheetBar(
                         .background(Color(0xFFec3557))
                 ) {
                     LinearProgressIndicator(
-                        progress = animatedProgress,
+                        progress = {animatedProgress},
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(5.dp)
@@ -178,6 +178,7 @@ fun ModularSheetBar(
         }
     }
 }
+
 @Preview
 @Composable
 fun SheetBarPreview() {
