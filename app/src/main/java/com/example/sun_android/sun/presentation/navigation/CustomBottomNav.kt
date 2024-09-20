@@ -33,6 +33,7 @@ import com.example.sun_android.sun.presentation.components.FirstPageContent
 import com.example.sun_android.sun.presentation.components.ModularSheetBar
 import com.example.sun_android.sun.presentation.components.SecondPageContent
 import com.example.sun_android.sun.presentation.components.SheetBar
+import com.example.sun_android.sun.presentation.components.ThirdPageContent
 import com.example.sun_android.sun.util.Screens
 import kotlinx.coroutines.launch
 
@@ -131,12 +132,9 @@ fun CustomBottomNavigation(
 // Handle page change here
         ) { page, pagerState, coroutineScope ->
         when (page) {
-                0 -> FirstPageContent(
-
-                )
-                1 -> SecondPageContent(
-
-                )
+                0 -> FirstPageContent()
+                1 -> SecondPageContent()
+                2 -> ThirdPageContent()
             }
         }
     }
