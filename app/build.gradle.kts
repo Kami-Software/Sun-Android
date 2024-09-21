@@ -69,9 +69,8 @@ dependencies {
     implementation("androidx.emoji2:emoji2:1.5.0")
     implementation(libs.androidx.emoji2.emojipicker)
 ///Time Picker
-    implementation("com.chargemap.compose:numberpicker:1.0.5")
 
-
+    implementation ("com.github.vsnappy1:ComposeDatePicker:2.2.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
