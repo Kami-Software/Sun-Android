@@ -101,7 +101,7 @@ fun FourthPageContent() {
                 focusedIndicatorColor = Color(0xFF2D2D31),
                 focusedContainerColor = Color(0xFF2D2D31),
                 disabledContainerColor = Color(0xFF2D2D31),
-                cursorColor = Color.Blue
+                cursorColor = Color(0xFF0091FF)
             ),
             placeholder = {
                 Box(
