@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    id("kotlin-kapt")
+
+
 }
 
 android {
@@ -74,6 +77,9 @@ dependencies {
     implementation ("com.github.vsnappy1:ComposeDatePicker:2.2.0")
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.firestore)
+    //dagger hilt
+    implementation("com.google.dagger:hilt-android:2.49")
+    kapt("com.google.dagger:hilt-android-compiler:2.49")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
