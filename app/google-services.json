@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "901005523025",
+    "project_id": "sunapp-5c4df",
+    "storage_bucket": "sunapp-5c4df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901005523025:android:04e896b7b694868f912070",
+        "android_client_info": {
+          "package_name": "com.example.sun_android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD--kCg0YZF3Zv64OoXvDsZPmJPO84FNQs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

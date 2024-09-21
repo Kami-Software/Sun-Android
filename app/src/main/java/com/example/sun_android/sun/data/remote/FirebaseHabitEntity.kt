@@ -2,7 +2,7 @@ package com.example.sun_android.sun.data.remote
 
 import com.google.firebase.firestore.PropertyName
 
-class FirebaseHabitEntity (
+data class FirebaseHabitEntity (
     @PropertyName("color") val color: String = "yellow",
     @PropertyName("completed") val completed: Boolean = false,
     @PropertyName("currentCount") val currentCount: Int = 0,
@@ -22,4 +22,5 @@ class FirebaseHabitEntity (
     @PropertyName("type") val type: String = "Weekly"
 
 ) {
+
 }
