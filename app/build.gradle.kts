@@ -71,6 +71,7 @@ dependencies {
 ///Time Picker
 
     implementation ("com.github.vsnappy1:ComposeDatePicker:2.2.0")
+    implementation(libs.firebase.firestore.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
