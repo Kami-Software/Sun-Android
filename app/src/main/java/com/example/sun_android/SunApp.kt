@@ -1,4 +1,11 @@
 package com.example.sun_android
 
-class SunApp {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class SunApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+    }
 }
