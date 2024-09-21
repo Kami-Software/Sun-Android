@@ -62,10 +62,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     //Materal Libs
     implementation("androidx.compose.material:material-icons-extended:1.7.2")
-    implementation("androidx.navigation:navigation-compose:2.8.0")
+    implementation("androidx.navigation:navigation-compose:2.8.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.32.0")
-    implementation("androidx.compose.ui:ui-util:1.7.1")
+    implementation("androidx.compose.ui:ui-util:1.7.2")
     implementation("androidx.emoji2:emoji2:1.5.0")
     implementation(libs.androidx.emoji2.emojipicker)
 
