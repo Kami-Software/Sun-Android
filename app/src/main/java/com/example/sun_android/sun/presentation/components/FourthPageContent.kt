@@ -90,7 +90,7 @@ fun FourthPageContent() {
                 color = Color.White
             ),
             modifier = Modifier
-                .fillMaxWidth(0.75f) // Adjust the width as needed
+                .fillMaxWidth(0.90F) // Adjust the width as needed
                 .height(80.dp) // Adjust height
                 .clip(RoundedCornerShape(10.dp)), // Rounded corners
             singleLine = true,
@@ -129,7 +129,7 @@ fun FourthPageContent() {
                 color = Color.White
             ),
             modifier = Modifier
-                .fillMaxWidth(0.75f) // Adjust the width as needed
+                .fillMaxWidth(0.90F) // Adjust the width as needed
                 .height(80.dp) // Adjust height
                 .clip(RoundedCornerShape(10.dp)), // Rounded corners
             singleLine = true,
