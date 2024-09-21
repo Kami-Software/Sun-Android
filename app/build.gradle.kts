@@ -68,6 +68,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-util:1.7.2")
     implementation("androidx.emoji2:emoji2:1.5.0")
     implementation(libs.androidx.emoji2.emojipicker)
+///Time Picker
+    implementation("com.chargemap.compose:numberpicker:1.0.5")
+
 
 
     testImplementation(libs.junit)
