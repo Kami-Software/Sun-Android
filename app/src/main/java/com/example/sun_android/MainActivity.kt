@@ -31,7 +31,9 @@ import com.example.sun_android.sun.presentation.statistics_screen.StatisticsScre
 import com.example.sun_android.sun.presentation.swipe_screen.SwipeScreen
 import com.example.sun_android.sun.util.Screens
 import com.example.sun_android.ui.theme.SunAndroidTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
