@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,12 +17,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sun_android.sun.presentation.components.HabbitCard
 
 @Composable
-fun HabbitsScreen(navController: NavController) {
+fun HabbitsScreen(navController: NavController, viewModel: HabitViewModel = hiltViewModel()) {
     val habits = remember { listOf("Running") }
+    val habitsState = viewModel.habits.collectAsState()
 
     // Main layout for the Habits screen
     Column(
@@ -42,8 +45,10 @@ fun HabbitsScreen(navController: NavController) {
             columns = StaggeredGridCells.Fixed(2), // Two columns
             modifier = Modifier.fillMaxSize()
         ) {
+            val habits = habitsState.value // Get the current state value
             items(habits.size) { index ->
-                HabbitCard(habits[index])
+                val habit = habits[index]
+                HabbitCard(title = habit.title) // Display the habit title
             }
         }
     }
