@@ -1,5 +1,6 @@
 package com.example.sun_android.sun.data.repository
 
+import android.util.Log
 import com.example.sun_android.sun.data.remote.FirebaseHabitEntity
 import com.example.sun_android.sun.domain.repository.FirebaseHabitRepository
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.callbackFlow
 class FirebaseHabitRepositoryImpl(
     private val firestore: FirebaseFirestore
 ): FirebaseHabitRepository {
-    private val habitsCollection = firestore.collection("habits")
+    private val habitsCollection = firestore.collection("habits").document("userId123").collection("swimming")
 
     override suspend fun addHabit(habit: FirebaseHabitEntity) {
         TODO("Not yet implemented")
@@ -33,8 +34,10 @@ class FirebaseHabitRepositoryImpl(
         val listenerRegistration: ListenerRegistration = habitsCollection
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
+                    Log.e("FirebaseHabitRepository", "Error getting habits", error)
                     close(error) // Close the flow on error
                 } else {
+                    Log.e("FirebaseHabitRepository", "Error getting habits or snapshot is null", error)
                     val habits = snapshot?.toObjects(FirebaseHabitEntity::class.java) ?: emptyList()
                     trySend(habits).isSuccess // Send the data to the flow
                 }
