@@ -3,10 +3,11 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     id("kotlin-kapt")
-
-
+    id("com.google.dagger.hilt.android")
 }
-
+kapt {
+    correctErrorTypes = true
+}
 android {
     namespace = "com.example.sun_android"
     compileSdk = 34
@@ -72,14 +73,18 @@ dependencies {
     implementation("androidx.compose.ui:ui-util:1.7.2")
     implementation("androidx.emoji2:emoji2:1.5.0")
     implementation(libs.androidx.emoji2.emojipicker)
-///Time Picker
-
+    //Time Picker
     implementation ("com.github.vsnappy1:ComposeDatePicker:2.2.0")
+
+    //dagger hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    // Firebase Kütüphaneleri
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.firestore)
-    //dagger hilt
-    implementation("com.google.dagger:hilt-android:2.49")
-    kapt("com.google.dagger:hilt-android-compiler:2.49")
+    implementation("com.google.firebase:firebase-analytics")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
