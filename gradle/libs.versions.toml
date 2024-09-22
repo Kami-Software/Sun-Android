@@ -1,6 +1,7 @@
 [versions]
 agp = "8.6.0"
 composedatepicker = "2.2.0"
+firebaseFirestoreVersion = "25.1.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -19,6 +20,7 @@ firebaseFirestore = "25.1.0"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 composedatepicker = { module = "com.github.vsnappy1:ComposeDatePicker", version.ref = "composedatepicker" }
+firebase-firestore-v2201 = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestoreVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
