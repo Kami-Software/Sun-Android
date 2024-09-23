@@ -40,19 +40,21 @@ import androidx.emoji2.emojipicker.EmojiViewItem
 import kotlinx.coroutines.delay
 
 @Composable
-fun ColorCard() {
+fun ColorCard(onColorSelected: (Color) -> Unit) {
     var selectedEmoji by remember { mutableStateOf("😊") } // Başlangıç emojisi
     var showEmojiPicker by remember { mutableStateOf(false) }
 
     // Renk listesi
     val colors = listOf(
+        Color.Transparent,
         Color.Red,
         Color.Green,
         Color.Blue,
         Color.Yellow,
         Color.Cyan,
         Color.Magenta,
-        Color.Gray
+        Color.Gray,
+        Color.Transparent,
     )
 
     var emojiScale by remember { mutableFloatStateOf(1f) }
@@ -62,7 +64,7 @@ fun ColorCard() {
     )
     LaunchedEffect(selectedEmoji) {
         emojiScale = 1.5f // Emojiyi büyüt
-        delay(300)        // Bir süre bekle
+        delay(200)        // Bir süre bekle
         emojiScale = 1f   // Emojiyi tekrar normal boyuta getir
     }
 
@@ -71,7 +73,7 @@ fun ColorCard() {
 
     // Başlangıçta orta karta kaydır
     LaunchedEffect(Unit) {
-        listState.scrollToItem(colors.size / 2)
+        listState.scrollToItem(1)
     }
 
     Box(
@@ -83,13 +85,17 @@ fun ColorCard() {
         LazyRow(
             state = listState,
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            horizontalArrangement = Arrangement.spacedBy(30.dp),
             contentPadding = PaddingValues(horizontal = 30.dp) // Kart genişliğinin yarısı
         ) {
             itemsIndexed(colors) { index, color ->
                 // Her bir öğe için ofset hesaplaması
                 val itemOffset = calculateItemOffset(index, listState)
-                val isFocused = itemOffset < 0.1f
+                val isFocused = itemOffset < 0.4f
+                if (isFocused) {
+                    // Focus durumunda rengi bildir
+                    onColorSelected(color)
+                }
 
                 val scale = lerp(0.7f, 1.2f, 1f - itemOffset.coerceIn(0f, 1f))
                 val alpha = lerp(0.5f, 1f, 1f - itemOffset.coerceIn(0f, 1f))
@@ -175,5 +181,5 @@ fun calculateItemOffset(index: Int, listState: LazyListState): Float {
 @Preview
 @Composable
 fun ColorCardPreview() {
-    ColorCard()
+    //ColorCard()
 }
