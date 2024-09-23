@@ -16,6 +16,10 @@ import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +32,8 @@ import androidx.compose.ui.unit.sp
 // Second page content
 @Composable
 fun SecondPageContent() {
+    var selectedColor by remember { mutableStateOf(Color(0xFFec3557)) } // Varsayılan renk
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -39,7 +45,7 @@ fun SecondPageContent() {
             imageVector = Icons.Outlined.Palette,
             contentDescription = "Icon Button",
             modifier = Modifier.size(100.dp),
-            tint = Color(0xFFec3557)
+            tint = selectedColor
         )
 
         Text(
@@ -61,7 +67,9 @@ fun SecondPageContent() {
             modifier = Modifier.padding(bottom = 10.dp)
         )
 
-        ColorCard()
+        ColorCard { color ->
+            selectedColor = color // Seçilen renk dinamik olarak güncelleniyor
+        }
     }
 }
 
