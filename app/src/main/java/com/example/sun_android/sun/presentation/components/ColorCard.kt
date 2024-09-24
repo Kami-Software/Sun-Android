@@ -47,13 +47,18 @@ fun ColorCard(onColorSelected: (Color) -> Unit) {
     // Renk listesi
     val colors = listOf(
         Color.Transparent,
-        Color.Red,
-        Color.Green,
-        Color.Blue,
-        Color.Yellow,
-        Color.Cyan,
-        Color.Magenta,
-        Color.Gray,
+        Color(255, 69, 58, 255),
+        Color(255, 159, 10, 255),
+        Color(255, 214, 10, 255),
+        Color(48, 209, 88, 255),
+        Color(99, 230, 226, 255),
+        Color(64, 200, 224, 255),
+        Color(100, 210, 255, 255),
+        Color(10, 132, 255, 255),
+        Color(94, 92, 230, 255),
+        Color(191, 90, 242, 255),
+        Color(255, 55, 95, 255),
+        Color(172, 142, 104, 255),
         Color.Transparent,
     )
 
