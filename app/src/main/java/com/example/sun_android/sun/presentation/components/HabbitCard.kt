@@ -55,6 +55,9 @@ fun HabbitCard(title: String) {
             .height(225.dp)
             .border(0.5.dp, Color.Red, MaterialTheme.shapes.medium)
             .clickable {
+                if (progress < 1.0f) {
+                    progress += 0.1f
+                }
             }, shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
             containerColor = if (isCompleted) Color.Red.copy(alpha = 0.2f) else Color.Gray.copy(
@@ -78,9 +81,7 @@ fun HabbitCard(title: String) {
                                 .clip(CircleShape)
                                 .align(Alignment.TopEnd) // Sağ üst köşeye yerleştirme
                                 .clickable {
-                                    if (progress < 1.0f) {
-                                        progress += 0.1f
-                                    }
+
                                 }// Sağ üst köşeden biraz boşluk bırakma
                         ) {
                             Icon(
