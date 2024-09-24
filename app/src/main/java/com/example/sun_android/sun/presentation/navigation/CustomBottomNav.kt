@@ -33,7 +33,6 @@ import com.example.sun_android.sun.presentation.components.FirstPageContent
 import com.example.sun_android.sun.presentation.components.FourthPageContent
 import com.example.sun_android.sun.presentation.components.ModularSheetBar
 import com.example.sun_android.sun.presentation.components.SecondPageContent
-import com.example.sun_android.sun.presentation.components.SheetBar
 import com.example.sun_android.sun.presentation.components.SixthPageContent
 import com.example.sun_android.sun.presentation.components.ThirdPageContent
 import com.example.sun_android.sun.util.Screens

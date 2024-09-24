@@ -84,14 +84,14 @@ fun ColorCard(onColorSelected: (Color) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp),
+            .height(200.dp),
         contentAlignment = Alignment.Center
     ) {
         LazyRow(
             state = listState,
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(30.dp),
-            contentPadding = PaddingValues(horizontal = 30.dp) // Kart genişliğinin yarısı
+            contentPadding = PaddingValues(horizontal = 30.dp, vertical = 40.dp) // Kart genişliğinin yarısı
         ) {
             itemsIndexed(colors) { index, color ->
                 // Her bir öğe için ofset hesaplaması
@@ -186,5 +186,5 @@ fun calculateItemOffset(index: Int, listState: LazyListState): Float {
 @Preview
 @Composable
 fun ColorCardPreview() {
-    //ColorCard()
+    ColorCard(onColorSelected = {})
 }
