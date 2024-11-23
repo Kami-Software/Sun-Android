@@ -42,7 +42,7 @@ import com.commandiron.wheel_picker_compose.WheelTimePicker
 
 @Composable
 fun SixthPageContent() {
-    var checked by remember { mutableStateOf(true) }
+    var checked by remember { mutableStateOf(false) }
     var selectedHour by remember { mutableStateOf(21) }
     var selectedMinute by remember { mutableStateOf(9) }
     var showDialog by remember { mutableStateOf(false) }

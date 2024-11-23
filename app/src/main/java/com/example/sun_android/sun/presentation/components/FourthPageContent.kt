@@ -1,5 +1,7 @@
 package com.example.sun_android.sun.presentation.components
 
+import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,6 +23,8 @@ import androidx.compose.material.icons.outlined.Tag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -38,14 +42,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.commandiron.wheel_picker_compose.WheelTimePicker
+import com.commandiron.wheel_picker_compose.core.WheelPickerDefaults
 
 
 @Composable
 fun FourthPageContent() {
+    var selectedUnits by remember { mutableStateOf("Km") }
     var number by remember { mutableStateOf("") }
     var timesText by remember { mutableStateOf("") }
+    var checked by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -77,7 +86,6 @@ fun FourthPageContent() {
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(bottom = 40.dp)
         )
-
 
         OutlinedTextField(
             value = number,
@@ -118,45 +126,81 @@ fun FourthPageContent() {
                 }
             }
         )
-        Spacer(modifier = Modifier.height(16.dp)) // Space between the text fields
-        OutlinedTextField(
-            value = timesText,
-            onValueChange = { timesText = it },
-            textStyle = MaterialTheme.typography.bodyLarge.copy(
-                fontSize = 26.sp,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center,
-                color = Color.White
-            ),
+
+        Row(
             modifier = Modifier
-                .fillMaxWidth(0.90F) // Adjust the width as needed
-                .height(80.dp) // Adjust height
-                .clip(RoundedCornerShape(10.dp)), // Rounded corners
-            singleLine = true,
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = Color(0xFF2D2D31),
-                unfocusedLabelColor = Color.White,
-                unfocusedIndicatorColor = Color(0xFF2D2D31),
-                focusedIndicatorColor = Color(0xFF2D2D31),
-                focusedContainerColor = Color(0xFF2D2D31),
-                disabledContainerColor = Color(0xFF2D2D31),
-                cursorColor = Color(0xFF0091FF)
-            ),
-            placeholder = {
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center // Center placeholder
-                ) {
-                    Text(
-                        text = "Times",
-                        fontSize = 26.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        textAlign = TextAlign.Center,
-                        color = Color.White
-                    )
+                .padding(vertical = 5.dp)
+                .padding(horizontal = 5.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically // Align items vertically in the center
+
+        ) {
+            Text(
+                text = "Custom Unit",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.White, // Lighter gray for subtitle
+                textAlign = TextAlign.Start,
+                modifier = Modifier.weight(1f)
+            )
+            Switch(
+                checked = checked,
+                onCheckedChange = {
+                    checked = it
+                },
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = Color.White,
+                    checkedTrackColor = Color(0xFFec3557),
+                )
+            )
+        }
+        if (!checked){
+            UnitPicker(
+                selectedUnits = selectedUnits,
+                onUnitSelected = { unit -> Log.e("Unit:","Selected Unit: $unit") }
+            )
+        }
+        else{
+            OutlinedTextField(
+                value = timesText,
+                onValueChange = { timesText = it },
+                textStyle = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center,
+                    color = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth(0.90F) // Adjust the width as needed
+                    .height(80.dp) // Adjust height
+                    .clip(RoundedCornerShape(10.dp)), // Rounded corners
+                singleLine = true,
+                colors = TextFieldDefaults.colors(
+                    unfocusedContainerColor = Color(0xFF2D2D31),
+                    unfocusedLabelColor = Color.White,
+                    unfocusedIndicatorColor = Color(0xFF2D2D31),
+                    focusedIndicatorColor = Color(0xFF2D2D31),
+                    focusedContainerColor = Color(0xFF2D2D31),
+                    disabledContainerColor = Color(0xFF2D2D31),
+                    cursorColor = Color(0xFF0091FF)
+                ),
+                placeholder = {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center // Center placeholder
+                    ) {
+                        Text(
+                            text = "Times",
+                            fontSize = 26.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
                 }
-            }
-        )
+            )
+        }
+
 
 
     }
