@@ -10,12 +10,12 @@ kapt {
 }
 android {
     namespace = "com.example.sun_android"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.sun_android"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = 26
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -66,22 +66,23 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     //Materal Libs
-    implementation("androidx.compose.material:material-icons-extended:1.7.2")
-    implementation("androidx.navigation:navigation-compose:2.8.1")
+    implementation("androidx.compose.material:material-icons-extended:1.7.5")
+    implementation("androidx.navigation:navigation-compose:2.8.4")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.32.0")
-    implementation("androidx.compose.ui:ui-util:1.7.2")
+    implementation("androidx.compose.ui:ui-util:1.7.5")
     implementation("androidx.emoji2:emoji2:1.5.0")
     implementation(libs.androidx.emoji2.emojipicker)
     //Time Picker
     implementation ("com.github.vsnappy1:ComposeDatePicker:2.2.0")
+    implementation("com.github.commandiron:WheelPickerCompose:1.1.11")
 
     //dagger hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     // Firebase Kütüphaneleri
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.firestore)
     implementation("com.google.firebase:firebase-analytics")
