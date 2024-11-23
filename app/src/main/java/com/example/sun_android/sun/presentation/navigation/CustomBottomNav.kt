@@ -49,7 +49,7 @@ fun CustomBottomNavigation(
     val totalPages = 5 // Total number of pages
     var additionalInput by remember { mutableStateOf("") }
     val items = listOf(
-        Screens.HabbitsScreen, Screens.SwipeScreen, Screens.StatisticsScreen
+        Screens.HabbitsScreen, Screens.TodosScreen, Screens.StatisticsScreen
     )
     val showSheet = remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
@@ -147,10 +147,6 @@ fun CustomBottomNavigation(
 @ExperimentalAnimationApi
 @Composable
 fun CustomBottomNavigationItem(item: Screens, isSelected: Boolean, onClick: () -> Unit) {
-    val background =
-        if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f) else Color.Transparent
-    val contentColor =
-        if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground
 
     Box(
         modifier = Modifier
