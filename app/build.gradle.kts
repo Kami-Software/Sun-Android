@@ -73,8 +73,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-util:1.7.5")
     implementation("androidx.emoji2:emoji2:1.5.0")
     implementation(libs.androidx.emoji2.emojipicker)
-    //Time Picker
-    implementation ("com.github.vsnappy1:ComposeDatePicker:2.2.0")
+    //While Picker
     implementation("com.github.commandiron:WheelPickerCompose:1.1.11")
 
     //dagger hilt
