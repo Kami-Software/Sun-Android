@@ -31,17 +31,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.emoji2.emojipicker.EmojiPickerView
-import androidx.emoji2.emojipicker.EmojiViewItem
-import com.vsnappy1.timepicker.enums.MinuteGap
-import com.vsnappy1.timepicker.ui.model.TimePickerConfiguration
+import com.commandiron.wheel_picker_compose.WheelTimePicker
 
 
 @Composable
@@ -109,61 +105,15 @@ fun SixthPageContent() {
             )
         }
         if (checked) {
-            Row(
-                modifier = Modifier
-                    .padding(bottom = 20.dp)
-                    .padding(horizontal = 5.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically // Align items vertically in the center
 
-            ) {
-                Text(
-                    text = "Reminder Time:",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color.White, // Lighter gray for subtitle
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier.weight(1f)
-                )
-                Box(
-                    modifier = Modifier
-                        .background(Color(0xFF2D2D31), RoundedCornerShape(10.dp))
-                        .padding(horizontal = 15.dp, vertical = 10.dp)
-                        .clickable { showDialog = true },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = String.format("%02d:%02d", selectedHour, selectedMinute),
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    )
-                }
+            WheelTimePicker(
+                textColor = Color.White, modifier = Modifier.fillMaxWidth(), size = DpSize(400.dp, 200.dp)
+            ) { snappedTime ->
+                selectedHour = snappedTime.hour
+                selectedMinute = snappedTime.minute
             }
         }
 
-    }
-    if (showDialog) {
-        AlertDialog(
-            containerColor = Color(0xFF201e1e),
-            onDismissRequest = { showDialog = false },
-            text = {
-                com.vsnappy1.timepicker.TimePicker(
-                    onTimeSelected = { hour, minute ->
-                        selectedHour = hour
-                        selectedMinute = minute
-                    },
-                    is24Hour = true,
-                    minuteGap = MinuteGap.FIVE,
-                    configuration = TimePickerConfiguration.Builder()
-                        .numberOfTimeRowsDisplayed(count = 5).selectedTimeTextStyle(TextStyle(Color.White))
-                        .selectedTimeScaleFactor(scaleFactor = 1.4f).timeTextStyle(TextStyle(Color.Gray))
-                        .build()
-                )
-            },
-            confirmButton = {}
-        )
     }
 }
 
