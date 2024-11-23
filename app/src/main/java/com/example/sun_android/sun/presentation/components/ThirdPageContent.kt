@@ -1,6 +1,7 @@
 package com.example.sun_android.sun.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,8 @@ import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +32,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ThirdPageContent() {
     val weekDays = listOf("M", "T", "W", "T", "F", "S", "S")
+    val selectedDays =
+        remember { mutableStateListOf(false, false, false, false, false, false, false) }
 
     Column(
         modifier = Modifier
@@ -67,24 +72,31 @@ fun ThirdPageContent() {
             fontWeight = FontWeight.Bold,
             color = Color.White, // Lighter gray for subtitle
             textAlign = TextAlign.Start,
-            modifier = Modifier.padding(bottom = 20.dp, start = 20.dp).align(Alignment.Start)
+            modifier = Modifier
+                .padding(bottom = 20.dp, start = 20.dp)
+                .align(Alignment.Start)
         )
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            for (i in 1..7) {
+            for (i in 0..6) {
                 Box(
-                    modifier = Modifier // Sağ üst köşeden biraz boşluk bırakma
-                        .size(35.dp) // Şeklin boyutu
+                    modifier = Modifier
+                        .size(35.dp)
                         .clip(CircleShape)
-                        .background(Color.Gray),
+                        .background(
+                            if (selectedDays[i]) Color(0xFFec3557) else Color.Gray
+                        )
+                        .clickable {
+                            selectedDays[i] = !selectedDays[i]
+                        },
                 ) {
                     Text(
-                        text = weekDays[i - 1],
+                        text = weekDays[i],
                         modifier = Modifier.align(Alignment.Center),
                         fontWeight = FontWeight.Bold,
-                        color = Color.White,
+                        color = if (selectedDays[i]) Color.Black else Color.White,
                         fontSize = 16.sp,
                     )
                 }
@@ -97,6 +109,6 @@ fun ThirdPageContent() {
 
 @Composable
 @Preview
-fun ThirdPageContentView(){
+fun ThirdPageContentView() {
     ThirdPageContent()
 }
