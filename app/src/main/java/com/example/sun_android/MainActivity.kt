@@ -30,7 +30,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -54,7 +53,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.sun_android.sun.presentation.navigation.CustomBottomNavigation
 import com.example.sun_android.sun.presentation.habits_screen.HabbitsScreen
 import com.example.sun_android.sun.presentation.statistics_screen.StatisticsScreen
-import com.example.sun_android.sun.presentation.swipe_screen.SwipeScreen
+import com.example.sun_android.sun.presentation.todos_screen.TodosScreen
 import com.example.sun_android.sun.util.Screens
 import com.example.sun_android.ui.theme.SunAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -99,7 +98,7 @@ class MainActivity : ComponentActivity() {
                             val destination = backStackEntry.destination.route
                             currentScreen.value = when (destination) {
                                 Screens.HabbitsScreen.id -> Screens.HabbitsScreen
-                                Screens.SwipeScreen.id -> Screens.SwipeScreen
+                                Screens.TodosScreen.id -> Screens.TodosScreen
                                 Screens.StatisticsScreen.id -> Screens.StatisticsScreen
                                 else -> Screens.HabbitsScreen
                             }
@@ -225,8 +224,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavigationHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screens.HabbitsScreen.id) {
-        composable(route = Screens.SwipeScreen.id) {
-            SwipeScreen(navController = navController)
+        composable(route = Screens.TodosScreen.id) {
+            TodosScreen(navController = navController)
         }
         composable(route = Screens.StatisticsScreen.id) {
             StatisticsScreen(navController = navController)
