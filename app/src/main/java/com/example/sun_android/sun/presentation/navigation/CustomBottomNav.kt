@@ -1,6 +1,7 @@
 package com.example.sun_android.sun.presentation.navigation
 
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
@@ -11,6 +12,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CheckCircleOutline
+import androidx.compose.material.icons.outlined.ChangeCircle
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -29,6 +32,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.sun_android.sun.presentation.components.CustomExpandableFab
+import com.example.sun_android.sun.presentation.components.FABItem
 import com.example.sun_android.sun.presentation.components.FirstPageContent
 import com.example.sun_android.sun.presentation.components.FourthPageContent
 import com.example.sun_android.sun.presentation.components.ModularSheetBar
@@ -72,26 +77,35 @@ fun CustomBottomNavigation(
         verticalAlignment = Alignment.CenterVertically
     ) {
 
-        Box(
-            modifier = Modifier
-                .clip(CircleShape)
-                .border(1.dp, Color(0xFF6c6565), CircleShape) // Çerçeve eklendi
-                .background(Color(0xFF2c292a))
-                .clickable {
-                    showSheet.value = !showSheet.value
-                    currentPage = 0
+        CustomExpandableFab(
+            items = listOf(
+                FABItem(icon = Icons.Default.CheckCircleOutline, text = "Add Todo"),
+                FABItem(icon = Icons.Outlined.ChangeCircle, text = "Add Habit"),
+            ),
+
+            onItemClick = { clickedItem ->
+                val items: List<FABItem> = listOf(
+                    FABItem(icon = Icons.Default.CheckCircleOutline, text = "Add Todo"),
+                    FABItem(icon = Icons.Outlined.ChangeCircle, text = "Add Habit")
+                )
+                // İlgili item'in indeksini al
+                val index = items.indexOf(clickedItem)
+                when (index) {
+                    0 -> {
+
+                    }
+
+                    1 -> {
+                        showSheet.value = !showSheet.value
+                        currentPage = 0
+                    }
+
+                    else -> Log.e("Fab button", "Unknown item clicked") // Bilinmeyen durum
 
                 }
-                .padding(16.dp), // Butonun boyutunu ve iç boşluğunu ayarlıyoruz
-            contentAlignment = Alignment.Center // İkonu merkeze hizalıyoruz
-        ) {
-            Icon(
-                imageVector = Icons.Default.Add, // İstediğiniz bir ikon
-                contentDescription = "Button Icon",
-                tint = Color.White,
-                modifier = Modifier.size(28.dp)
-            )
-        }
+            }
+
+        )
 
         // Ortadaki iki öğeyi daha yakın yapmak için bir Row içinde gruplama
         Row(
@@ -122,7 +136,7 @@ fun CustomBottomNavigation(
         CustomBottomNavigationItem(item = items[2], isSelected = items[2].id == currentScreenId) {
             onItemSelected(items[2])
         }
-        val progress = currentPage.toFloat() / (totalPages-1)
+        val progress = currentPage.toFloat() / (totalPages - 1)
 
         ModularSheetBar(
             showSheet = showSheet.value,
