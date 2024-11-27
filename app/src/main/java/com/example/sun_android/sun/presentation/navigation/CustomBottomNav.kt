@@ -41,6 +41,7 @@ import com.example.sun_android.sun.presentation.components.SecondPageContent
 import com.example.sun_android.sun.presentation.components.SixthPageContent
 import com.example.sun_android.sun.presentation.components.ThirdPageContent
 import com.example.sun_android.sun.presentation.components.todos_components.TodosFirstPageContent
+import com.example.sun_android.sun.presentation.components.todos_components.TodosSecondPageContent
 import com.example.sun_android.sun.util.Screens
 import kotlinx.coroutines.launch
 
@@ -170,7 +171,7 @@ fun CustomBottomNavigation(
         ) { page, pagerState, coroutineScope ->
             when (page) {
                 0 -> TodosFirstPageContent()
-                1 -> FirstPageContent()
+                1 -> TodosSecondPageContent()
                 2 -> ThirdPageContent()
                 3 -> FourthPageContent()
                 4 -> SixthPageContent()
