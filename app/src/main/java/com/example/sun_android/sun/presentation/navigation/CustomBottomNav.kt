@@ -40,6 +40,7 @@ import com.example.sun_android.sun.presentation.components.ModularSheetBar
 import com.example.sun_android.sun.presentation.components.SecondPageContent
 import com.example.sun_android.sun.presentation.components.SixthPageContent
 import com.example.sun_android.sun.presentation.components.ThirdPageContent
+import com.example.sun_android.sun.presentation.components.todos_components.TodosFirstPageContent
 import com.example.sun_android.sun.util.Screens
 import kotlinx.coroutines.launch
 
@@ -57,6 +58,8 @@ fun CustomBottomNavigation(
         Screens.HabbitsScreen, Screens.TodosScreen, Screens.StatisticsScreen
     )
     val showSheet = remember { mutableStateOf(false) }
+    val showTodosSheet = remember { mutableStateOf(false) }
+
     val coroutineScope = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = { 5 })
 
@@ -92,7 +95,8 @@ fun CustomBottomNavigation(
                 val index = items.indexOf(clickedItem)
                 when (index) {
                     0 -> {
-
+                        showTodosSheet.value = !showTodosSheet.value
+                        currentPage = 0
                     }
 
                     1 -> {
@@ -149,6 +153,24 @@ fun CustomBottomNavigation(
             when (page) {
                 0 -> FirstPageContent()
                 1 -> SecondPageContent()
+                2 -> ThirdPageContent()
+                3 -> FourthPageContent()
+                4 -> SixthPageContent()
+
+            }
+        }
+
+        ModularSheetBar(
+            showSheet = showTodosSheet.value,
+            onDismissRequest = { showTodosSheet.value = false },
+            progress = progress,
+            onPageChanged = { currentPage = it },
+            pagerState = pagerState // PagerState'i burada sağlıyoruz
+// Handle page change here
+        ) { page, pagerState, coroutineScope ->
+            when (page) {
+                0 -> TodosFirstPageContent()
+                1 -> FirstPageContent()
                 2 -> ThirdPageContent()
                 3 -> FourthPageContent()
                 4 -> SixthPageContent()
